@@ -346,23 +346,33 @@ window.onload = function() {
   document.body.appendChild(css);
 };
 
-// 새로운 텍스트 애니메이션: 순차적으로 누적
-function TxtAppend(el, toAppend, interval=2000) {
+function TxtAppend(el, toAppend, interval=2000, typingSpeed=100) {
   this.toAppend = toAppend;
   this.el = el;
-  this.index = 0;
+  this.index = 0;      // 현재 단어 인덱스
+  this.charIndex = 0;  // 현재 글자 인덱스
+  this.currentLine = "";  // 누적된 문자열
 
-  this.append = () => {
-    if (this.index < this.toAppend.length) {
-      this.el.innerHTML += (this.index > 0 ? " " : "") + this.toAppend[this.index];
+  const typeChar = () => {
+    const word = this.toAppend[this.index];
+    if (this.charIndex < word.length) {
+      this.currentLine += word[this.charIndex];
+      this.el.innerHTML = this.currentLine;
+      this.charIndex++;
+      setTimeout(typeChar, typingSpeed);
+    } else {
+      // 단어 끝나면 다음 단어 준비
       this.index++;
+      if (this.index < this.toAppend.length) {
+        this.currentLine += " "; // 단어 간격
+        this.charIndex = 0;
+        setTimeout(typeChar, interval); // 다음 단어 타이핑 시작 전 대기
+      }
     }
   };
 
-  // 첫 번째 단어 출력
-  this.append();
-  // interval마다 하나씩 추가
-  this.timer = setInterval(this.append, interval);
+  // 시작
+  typeChar();
 }
 
 // 초기화
@@ -370,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const el = document.querySelector(".txt-append");
   if (el) {
     const words = ["# 데이터분석", "# 인공지능", "# 인과분석", "# 공간분석"];
-    new TxtAppend(el, words, 2000);
+    new TxtAppend(el, words, 2000, 120);
   }
 });
 
