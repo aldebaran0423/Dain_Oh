@@ -346,6 +346,33 @@ window.onload = function() {
   document.body.appendChild(css);
 };
 
+// 새로운 텍스트 애니메이션: 순차적으로 누적
+function TxtAppend(el, toAppend, interval=2000) {
+  this.toAppend = toAppend;
+  this.el = el;
+  this.index = 0;
+
+  this.append = () => {
+    if (this.index < this.toAppend.length) {
+      this.el.innerHTML += (this.index > 0 ? " " : "") + this.toAppend[this.index];
+      this.index++;
+    }
+  };
+
+  // 첫 번째 단어 출력
+  this.append();
+  // interval마다 하나씩 추가
+  this.timer = setInterval(this.append, interval);
+}
+
+// 초기화
+document.addEventListener("DOMContentLoaded", function() {
+  const el = document.querySelector(".txt-append");
+  if (el) {
+    const words = ["# 데이터분석", "# 인공지능", "# 인과분석", "# 공간분석"];
+    new TxtAppend(el, words, 2000);
+  }
+});
 
 })(jQuery);
 
