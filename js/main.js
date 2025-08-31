@@ -379,7 +379,7 @@ function TxtAppend(el, toAppend, interval=2000, typingSpeed=100) {
 document.addEventListener("DOMContentLoaded", function() {
   const el = document.querySelector(".txt-append");
   if (el) {
-    const words = ["# 데이터분석", "# 인공지능", "# 인과분석", "# 공간분석"];
+    const words = ["# Data analysis", "# AI", "# Casual Inference", "# Spatial Analysis"];
     new TxtAppend(el, words, 2000, 120);
   }
 });
