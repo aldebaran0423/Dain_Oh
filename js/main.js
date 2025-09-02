@@ -380,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const el = document.querySelector(".txt-append");
   if (el) {
     const words = ["# Data analysis", "# AI", "# Causal Inference", "# Spatial Analysis"];
-    new TxtAppend(el, words, 2000, 100);
+    new TxtAppend(el, words, 1500, 100);
   }
 });
 
