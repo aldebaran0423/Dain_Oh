@@ -379,8 +379,8 @@ function TxtAppend(el, toAppend, interval=2000, typingSpeed=100) {
 document.addEventListener("DOMContentLoaded", function() {
   const el = document.querySelector(".txt-append");
   if (el) {
-    const words = ["# Data analysis", "# AI", "# Casual Inference", "# Spatial Analysis"];
-    new TxtAppend(el, words, 2000, 120);
+    const words = ["# Data analysis", "# AI", "# Causal Inference", "# Spatial Analysis"];
+    new TxtAppend(el, words, 2000, 100);
   }
 });
 
